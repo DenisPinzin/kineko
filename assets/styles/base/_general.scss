@@ -1,7 +1,11 @@
-// @font-face {
-//     font-family: ;
-//     src: url();
-// }
+@use "../abstract/variable" as v;
+@use "../abstract/mixin.scss" as m;
+
+
+@font-face {
+    font-family: "baloo2";
+    src: url("Baloo_2/static/Baloo2-Regular.ttf");
+}
 
 *{
     margin:0;
@@ -10,10 +14,34 @@
     text-decoration: none;
 }
 
-nav ul {
-    list-style: none;
+body {
+    font-family: "baloo2";
 }
 
-nav ul {
+section {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    max-width: 1024px;
+}
+
+h1 {
+    font-weight: bolder;
+    color: v.$primary;
+
+    @include m.textShadow();
+}
+
+h2 {
+    font-weight: bolder;
+    color: v.$primary;
+
+    @include m.textShadow();
+}
+
+p {
+    font-weight: bolder;
 }

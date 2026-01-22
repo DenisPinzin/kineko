@@ -1,6 +1,5 @@
-@use 'base/general';
+@use "base/general";
 
-header img {
-    height: 200px;
-    width: 200px;
-}
+//PAGES
+@use "pages/home";
+

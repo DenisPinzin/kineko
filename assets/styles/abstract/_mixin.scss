@@ -1,0 +1,13 @@
+@use "variable" as v;
+
+@mixin textShadow(){
+        text-shadow:
+        -2px 0   0 v.$secondary,
+         2px 0   0 v.$secondary,
+         0  -2px 0 v.$secondary,
+         0   2px 0 v.$secondary,
+        -2px -2px 0 v.$secondary,
+         2px -2px 0 v.$secondary,
+        -2px  2px 0 v.$secondary,
+         2px  2px 0 v.$secondary;
+}

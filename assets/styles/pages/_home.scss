@@ -1,0 +1,41 @@
+@use "../abstract/variable" as v;
+@use "../layout/header";
+@use "../layout/footer";
+
+
+//HERO
+
+.hero {
+    display: flex;
+    align-items: center;
+    padding: 3em 0;
+    gap: 6em;
+}
+
+.hero-img {
+    height: 16.4em;
+}
+
+.hero-img img {
+    height: 100%;
+}
+
+.hero-paragraph {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    height: 100%;
+}
+
+//LAST-PRODUCT
+
+.last-product {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1em;
+}
+
+.bg-product {
+    background-image: url("../../img/bgcollection.jpg");
+}

@@ -1,0 +1,68 @@
+@use "../abstract/variable" as v;
+@use "../abstract/mixin.scss" as m;
+
+footer {
+    background-color: v.$primary;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2em;
+    padding: 3em 0 1.5em 0;
+}
+
+.socials ul {
+    display: flex;
+    text-decoration: none;
+    gap: 1em;
+    color: v.$secondary;
+}
+
+.socials ul li a{
+    width: 1em;
+}
+
+.socials ul img {
+    width: 100%;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.footer-nav a{
+    color: v.$secondary;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.copyright {
+    align-self: center;
+    color: v.$secondary;
+    font-size: 1.2em;
+}
+
+@media screen and (max-width: 1050px) {
+    .footer-links {
+        flex-direction: column;
+        gap: 2em;
+    }
+
+    .footer-nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    }
+
+    .footer-nav a {
+        display: inline-block;
+        transition: transform 0.25s ease;
+    }
+
+    .footer-nav a:hover {
+        transform: scale(1.1);
+    }
+
+}

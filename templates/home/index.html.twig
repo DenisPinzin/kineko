@@ -3,7 +3,42 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
+    <main>
 
+    {# HERO #}
 
+        <section>
+            <div class="container">
+                <div class="hero">
+                    <div class="hero-img">
+                        <img src="{{asset('img/maneHero1.png')}}" alt="maneki-neko hero">
+                    </div>
+                    <div class="hero-paragraph">
+                        <h1>KINEKO</h1>
+                        <h2> La plateforme des collections de Maneki-neko</h2>
+                        <p>
+                            Kineko est un espace communautaire dédié aux Maneki-neko, célèbres chats porte-bonheur japonais. 
+                            Collectionneurs et passionnés partagent ici leurs figurines, leurs séries et leurs découvertes, 
+                            pour faire vivre ensemble l’univers du Maneki-neko.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        {# LAST PRODUCE #}
+
+        <section class="bg-product">
+            <div class="container">
+                <div  class="last-product">
+                    <h2>Les derniers produits</h2>
+                    <p>
+                        Découvrez nos dernières collections de Maneki-neko partagées par la communauté. Une mosaïque de 
+                        styles, d’histoires et de symboles, réunie en un seul endroit.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
 
 {% endblock %}

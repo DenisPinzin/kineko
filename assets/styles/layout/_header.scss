@@ -1,0 +1,47 @@
+@use "../abstract/variable" as v;
+@use "../abstract/mixin.scss" as m;
+
+
+nav {
+    background-color: v.$primary;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 11.1em;
+}
+
+.logo {
+    height: 7.4em;
+    width: 7.4em;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+nav ul li a {
+    display: inline-block; 
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: 1.5em;
+    color: v.$primary;
+
+    @include m.textShadow();
+
+    transition: transform 0.2s ease;
+    transform-origin: center;
+}
+
+nav ul li a:hover {
+    transform: translateY(-6px);
+}
