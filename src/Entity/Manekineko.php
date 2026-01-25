@@ -2,13 +2,21 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use App\Repository\ManekinekoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Entity\Fabriquant;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 #[ORM\Entity(repositoryClass: ManekinekoRepository::class)]
+#[Vich\Uploadable]
 class Manekineko
 {
     #[ORM\Id]
@@ -16,19 +24,14 @@ class Manekineko
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $auteur = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $dateFabrication = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $nomFabriquant = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $estimation = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank(message: 'Veuillez ajouter une description')]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'manekinekos')]
@@ -45,6 +48,20 @@ class Manekineko
     #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'manekineko')]
     private Collection $commentaires;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageName = null;
+
+    #[Vich\UploadableField(mapping: 'manekineko_images', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le nom du Manekineko est obligatoire.')]
+    private ?string $nom = null;
+
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -55,18 +72,6 @@ class Manekineko
         return $this->id;
     }
 
-    public function getAuteur(): ?string
-    {
-        return $this->auteur;
-    }
-
-    public function setAuteur(string $auteur): static
-    {
-        $this->auteur = $auteur;
-
-        return $this;
-    }
-
     public function getDateFabrication(): ?\DateTime
     {
         return $this->dateFabrication;
@@ -75,18 +80,6 @@ class Manekineko
     public function setDateFabrication(?\DateTime $dateFabrication): static
     {
         $this->dateFabrication = $dateFabrication;
-
-        return $this;
-    }
-
-    public function getNomFabriquant(): ?string
-    {
-        return $this->nomFabriquant;
-    }
-
-    public function setNomFabriquant(?string $nomFabriquant): static
-    {
-        $this->nomFabriquant = $nomFabriquant;
 
         return $this;
     }
@@ -168,4 +161,59 @@ class Manekineko
 
         return $this;
     }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): static
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if ($imageFile !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->nom;
+    }
+
 }

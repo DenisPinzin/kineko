@@ -15,7 +15,7 @@ class Fabriquant
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50, unique: true)]
     private ?string $nom = null;
 
     /**
@@ -45,6 +45,12 @@ class Fabriquant
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return (string) $this->nom;
+    }
+
 
     /**
      * @return Collection<int, Manekineko>

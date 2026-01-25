@@ -45,3 +45,41 @@ nav ul li a {
 nav ul li a:hover {
     transform: translateY(-6px);
 }
+
+.menu-line {
+    display: none;
+    width: 40px;
+    border: 2px solid v.$secondary;
+    border-radius: 10px;
+}
+
+.menu {
+  cursor: pointer;
+  display: none;
+}
+
+@media screen and (max-width: 1050px) {
+  .menu {
+    display: block;
+  }
+}
+
+
+@media screen and (max-width: 1050px) {
+  .menu-line {
+    display: flex;
+    margin: 10px;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding: 15px 0;
+  }
+
+  nav ul.nav-menu {
+    display: flex;
+  }
+}

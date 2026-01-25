@@ -4,6 +4,9 @@
 
 {% block body %}
     <main>
+    {% if app.user %}
+    <span>こんにちは {{ app.user.pseudo }}　さん</span>
+{% endif %}
 
     {# HERO #}
 
@@ -28,17 +31,63 @@
         
         {# LAST PRODUCE #}
 
-        <section class="bg-product">
-            <div class="container">
-                <div  class="last-product">
-                    <h2>Les derniers produits</h2>
-                    <p>
-                        Découvrez nos dernières collections de Maneki-neko partagées par la communauté. Une mosaïque de 
-                        styles, d’histoires et de symboles, réunie en un seul endroit.
-                    </p>
-                </div>
+<section class="bg-product">
+    <div class="container">
+        <div class="last-product">
+{% if lastManekinekos is empty %}
+    <p>Aucun Manekineko pour le moment.</p>
+{% else %}
+    <div class="cards">
+        {% for m in lastManekinekos %}
+            <div class="card">
+                <h2>{{ m.nom }}</h2>
+                <p><strong>Fabriquant :</strong> {{ m.fabriquant.nom }}</p>
+
+                {% if m.imageName %}
+                    <img src="{{ asset('uploads/images/' ~ m.imageName) }}" alt="image" style="width: 200px;">
+                {% endif %}
+
+                {% if m.dateFabrication %}
+                    <p><strong>Date :</strong> {{ m.dateFabrication|date('d/m/Y') }}</p>
+                {% endif %}
+
+                {% if m.estimation %}
+                    <p><strong>Estimation :</strong> {{ m.estimation }} €</p>
+                {% endif %}
+
+                {% if m.user %}
+                    <p><strong>Ajouté par :</strong> {{ m.user.userIdentifier }}</p>
+                {% endif %}
+
+                <a href="{{ path('manekineko_show', { id: m.id }) }}" class="btn">
+                    Détails
+                </a>
             </div>
-        </section>
+        {% endfor %}
+    </div>
+
+    <style>
+        .cards{
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            padding: 16px;
+        }
+        .card{
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.06);
+        }
+        .card h2{ margin: 0 0 10px 0; }
+        .card p{ margin: 6px 0; }
+    </style>
+{% endif %}
+
+        </div>
+    </div>
+</section>
+
     </main>
 
 {% endblock %}

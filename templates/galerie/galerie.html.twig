@@ -1,20 +1,71 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GalerieController!{% endblock %}
+{% block title %}Galerie{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Les collections</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% if manekinekos is empty %}
+        <p>Aucun Manekineko pour le moment.</p>
+    {% else %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/symfony/kineko/src/Controller/GalerieController.php</code></li>
-        <li>Your template at <code>C:/symfony/kineko/templates/galerie/index.html.twig</code></li>
-    </ul>
-</div>
+        <div class="cards">
+            {% for m in manekinekos %}
+                    <div class="card">
+                        <h2>{{ m.nom }}</h2>
+                        <p><strong>Fabriquant :</strong> {{ m.Fabriquant.nom }}</p>
+
+                        {% if m.imageName %}
+                            <img src="{{ asset('uploads/images/' ~ m.imageName) }}" alt="image" style="width: 200px;">
+                        {% endif %}
+
+                        {% if m.dateFabrication %}
+                            <p><strong>Date :</strong> {{ m.dateFabrication|date('d/m/Y') }}</p>
+                        {% endif %}
+
+                        {% if m.estimation %}
+                            <p><strong>Estimation :</strong> {{ m.estimation }} €</p>
+                        {% endif %}
+
+                        {# {% if m.description %}
+                            <p><strong>Description :</strong> {{ m.description }}</p>
+                        {% endif %} #}
+
+                        {% if m.user %}
+                            <p><strong>Ajouté par :</strong> {{ m.user.userIdentifier }}</p>
+                        {% endif %}
+
+                        {% if app.user and (m.user == app.user or is_granted('ROLE_ADMIN')) %}
+                        <a href="{{ path('manekineko_edit', {id: m.id}) }}">Modifier</a>
+                        <form method="POST" action="{{ path('manekineko_delete', {id: m.id}) }}"
+                                onsubmit="return confirm('Confirmer la suppression ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ m.id) }}">
+                            <button type="submit">Supprimer</button>
+                        </form>
+                        {% endif %}
+                            <a href="{{ path('manekineko_show', { id: m.id }) }}" class="btn">
+                                Détails
+                            </a>
+                    </div>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+
+    <style>
+        .cards{
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            padding: 16px;
+        }
+        .card{
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.06);
+        }
+        .card h2{ margin: 0 0 10px 0; }
+        .card p{ margin: 6px 0; }
+    </style>
 {% endblock %}
