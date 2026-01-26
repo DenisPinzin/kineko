@@ -1,5 +1,5 @@
 <?php
-
+// pas de repo pas besoin de lire
 namespace App\Controller;
 
 use App\Entity\Fabriquant;
@@ -17,24 +17,31 @@ final class AjouterController extends AbstractController
 {
     #[Route('/ajouter', name: 'ajouter')]
     public function index(
+        //recupere les GET et POST des form
         Request $request,
+        //requete de type CREATE ou update , delete
         EntityManagerInterface $entityManager,
+        //read des fabriquant
         FabriquantRepository $fabRepo
     ): Response {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         $manekineko = new Manekineko();
+        //createForm(mon formulaire, mon objet(colonne))
         $form = $this->createForm(ManekinekoType::class, $manekineko);
+        //finalisation de la requête
         $form->handleRequest($request);
-
+        // isset (vérification(pas vide...))
         if ($form->isSubmitted() && $form->isValid()) {
 
             $selectedFab = $form->get('fabriquant')->getData(); // Fabriquant|null
             $nomNouveau  = trim((string) $form->get('nouveauFabriquant')->getData());
 
             // "inconnu" est la valeur par défaut => si l'input est rempli, il doit pouvoir la remplacer
+            //CHATGPT START
             $selectedIsInconnu = $selectedFab && mb_strtolower((string) $selectedFab->getNom()) === 'inconnu';
 
+           
             // Si l'input est rempli ET (pas de select OU select = inconnu) => l'input gagne
             if ($nomNouveau !== '' && ($selectedFab === null || $selectedIsInconnu)) {
 
@@ -48,6 +55,8 @@ final class AjouterController extends AbstractController
                     $form->get('nouveauFabriquant')->addError(new FormError(
                         'Ce fabriquant existe déjà. Sélectionne-le dans la liste déroulante.'
                     ));
+
+                     //CHATGPT END
 
                     return $this->render('ajouter/ajouter.html.twig', [
                         'form' => $form->createView(),

@@ -3,17 +3,20 @@
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-<h1>Contacter l’administrateur</h1>
+<section class="bg-contact">
+    <div class="container">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
 
-{% for message in app.flashes('success') %}
-    <div class="alert alert-success">{{ message }}</div>
-{% endfor %}
+        {{ form_start(form) }}
+            <h1>Contacter l’administrateur</h1>
+            {{ form_row(form.nom) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.message) }}
 
-{{ form_start(form) }}
-    {{ form_row(form.nom) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.message) }}
-
-    <button class="btn btn-primary">Envoyer</button>
-{{ form_end(form) }}
+            <button class="btn btn-primary">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+</section>
 {% endblock %}

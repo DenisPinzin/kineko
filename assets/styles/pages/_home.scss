@@ -1,6 +1,8 @@
 @use "../abstract/variable" as v;
 @use "../layout/header";
 @use "../layout/footer";
+@use "../components/card" as c;
+@use "../components/buttons";
 
 
 //HERO
@@ -37,5 +39,35 @@
 }
 
 .bg-product {
-    background-image: url("../../img/bgcollection.jpg");
+    background-image: url("../../img/bgHero.jpg");
+    background-size: 100% 100%; /* largeur à 100% */
+    background-repeat: no-repeat;
+    background-position: top center;
+    padding: 3em 0;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+    place-items: center;
+}
+
+@media screen and (max-width: 1050px) {
+
+    .hero {
+        flex-direction: column;
+        // padding: 3em 0;
+        gap: 0;
+    }
+
+    .hero-paragraph {
+        align-items: center;
+        text-align: center;
+    }
+
+    .cards {
+    grid-template-columns: repeat(1, 1fr);
+    }
+
 }

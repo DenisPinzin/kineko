@@ -22,7 +22,7 @@ class Commentaire
     
 
     #[ORM\ManyToOne(inversedBy: 'commentaires')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?manekineko $manekineko = null;
 
     #[ORM\ManyToOne(inversedBy: 'commentaires')]

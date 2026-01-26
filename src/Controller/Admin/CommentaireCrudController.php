@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 
 class CommentaireCrudController extends AbstractCrudController
@@ -27,7 +28,13 @@ class CommentaireCrudController extends AbstractCrudController
 
         AssociationField::new('user', 'Auteur'),
         AssociationField::new('manekineko', 'Manekineko'),
+
     ];
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud->setDefaultSort(['id' => 'DESC']);
     }
 
 }

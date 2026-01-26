@@ -1,5 +1,5 @@
 <?php
-
+//Permet de faire la partie READ du CRUD
 namespace App\Repository;
 
 use App\Entity\Manekineko;

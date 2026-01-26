@@ -68,7 +68,7 @@ class ManekinekoType extends AbstractType
                 'label' => 'Changer l’image (optionnel)',
                 'allow_delete' => false,
                 'download_uri' => false,
-                'image_uri' => false,   // ✅ ça enlève l’aperçu image
+                'image_uri' => false,
             ])
 
         ;

@@ -3,69 +3,60 @@
 {% block title %}Galerie{% endblock %}
 
 {% block body %}
-    <h1>Les collections</h1>
+    <section class="bg-galerie">
+        <div class="container">
+            <h1 class="galerie-title">Les collections</h1>
 
-    {% if manekinekos is empty %}
-        <p>Aucun Manekineko pour le moment.</p>
-    {% else %}
+            {% if manekinekos is empty %}
+                <p>Aucun Manekineko pour le moment.</p>
+            {% else %}
 
-        <div class="cards">
-            {% for m in manekinekos %}
-                    <div class="card">
-                        <h2>{{ m.nom }}</h2>
-                        <p><strong>Fabriquant :</strong> {{ m.Fabriquant.nom }}</p>
+                <div class="cards-galerie">
+                {# {{dump(manekinekos)}} #}
+                    {% for m in manekinekos %}
+                            {# {{dump(m)}} #}
+                            <div class="card">
+                                <div class="card-img">
+                                    {% if m.imageName %}
+                                        <img src="{{ asset('uploads/images/' ~ m.imageName) }}" alt="image" style="width: 200px;">
+                                    {% endif %}
+                                </div>
+                                <div class="card-paragraph">
+                                    <h2>{{ m.nom }}</h2>
+                                    <p><span>Fabriquant :</span> {{ m.Fabriquant.nom }}</p>
+                                    {% if m.dateFabrication %}
+                                        <p><span>Date :</span> {{ m.dateFabrication|date('d/m/Y') }}</p>
+                                    {% endif %}
 
-                        {% if m.imageName %}
-                            <img src="{{ asset('uploads/images/' ~ m.imageName) }}" alt="image" style="width: 200px;">
-                        {% endif %}
+                                    {% if m.estimation %}
+                                        <p><span>Estimation :</span> {{ m.estimation }} €</p>
+                                    {% endif %}
 
-                        {% if m.dateFabrication %}
-                            <p><strong>Date :</strong> {{ m.dateFabrication|date('d/m/Y') }}</p>
-                        {% endif %}
+                                    {# {% if m.description %}
+                                        <p><strong>Description :</strong> {{ m.description }}</p>
+                                    {% endif %} #}
 
-                        {% if m.estimation %}
-                            <p><strong>Estimation :</strong> {{ m.estimation }} €</p>
-                        {% endif %}
+                                    {% if m.user %}
+                                        <p><span>Ajouté par :</span> {{ m.user.userIdentifier }}</p>
+                                    {% endif %}
 
-                        {# {% if m.description %}
-                            <p><strong>Description :</strong> {{ m.description }}</p>
-                        {% endif %} #}
+                                    {% if app.user and (m.user == app.user or is_granted('ROLE_ADMIN')) %}
+                                    <a href="{{ path('manekineko_edit', {id: m.id}) }}">Modifier</a>
+                                    <form method="POST" action="{{ path('manekineko_delete', {id: m.id}) }}"
+                                    onsubmit="return confirm('Confirmer la suppression ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ m.id) }}">
+                                        <button type="submit">Supprimer</button>
+                                    </form>
+                                    {% endif %}
+                                    <a href="{{ path('manekineko_show', { id: m.id }) }}" class="btn">
+                                        Détails
+                                    </a>
+                                </div>
+                            </div>
+                    {% endfor %}
+                </div>
 
-                        {% if m.user %}
-                            <p><strong>Ajouté par :</strong> {{ m.user.userIdentifier }}</p>
-                        {% endif %}
-
-                        {% if app.user and (m.user == app.user or is_granted('ROLE_ADMIN')) %}
-                        <a href="{{ path('manekineko_edit', {id: m.id}) }}">Modifier</a>
-                        <form method="POST" action="{{ path('manekineko_delete', {id: m.id}) }}"
-                                onsubmit="return confirm('Confirmer la suppression ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ m.id) }}">
-                            <button type="submit">Supprimer</button>
-                        </form>
-                        {% endif %}
-                            <a href="{{ path('manekineko_show', { id: m.id }) }}" class="btn">
-                                Détails
-                            </a>
-                    </div>
-            {% endfor %}
+            {% endif %}
         </div>
-
-    {% endif %}
-
-    <style>
-        .cards{
-            display:grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-            padding: 16px;
-        }
-        .card{
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,.06);
-        }
-        .card h2{ margin: 0 0 10px 0; }
-        .card p{ margin: 6px 0; }
-    </style>
+    </section>
 {% endblock %}

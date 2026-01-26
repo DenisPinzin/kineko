@@ -1,0 +1,26 @@
+@use "../abstract/variable" as v;
+
+// form {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 2em;
+//   background-color: rgba(v.$quaternary, 0.7);
+//   border: 2px solid v.$primary;
+//   border-radius: 20px;
+//   padding: 4em;
+//   font-weight: bold;
+// }
+
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+// form div input,  textarea {
+//     border: 2px solid v.$primary;
+//     height: 10px;
+// }
+
+textarea {
+    min-height: 200px;
+}

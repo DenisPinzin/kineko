@@ -17,11 +17,14 @@ final class ManekinekoController extends AbstractController
 {
     //MODIFIER
 
+    //Manekineko existe déja
+
     #[Route('/manekineko/{id}/edit', name: 'manekineko_edit')]
     public function edit(Manekineko $manekineko, Request $request, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
+        //CHATGPT START
         if ($manekineko->getUser() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException("Tu ne peux pas modifier cette carte.");
         }

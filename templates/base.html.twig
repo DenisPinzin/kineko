@@ -20,14 +20,14 @@
                 <div class="logo">
                     <img src="{{asset('img/logo.png')}}" alt="logo">
                 </div>
-                                <div class="menu">
+                <div class="menu">
                     <div class="menu-line"></div>
                     <div class="menu-line"></div>
                     <div class="menu-line"></div>
                 </div>
                 <ul class="links-menu">
                     <li><a href={{path('home')}}>Accueil</a></li>
-                    <li><a href={{path('galerie')}}>Les collections</a></li>
+                    <li><a href={{path('galerie')}}>Galerie</a></li>
                     <li class="nav-item"><a href="{{ path('contact') }}">Contact</a></li>
 
                     {% if app.user %}
@@ -67,11 +67,31 @@
                     </ul>
                 </div>
                 <div class="footer-nav">
-                    <ul>
-                        <li><a href="">Accueil</a></li>
-                        <li><a href="">Les collections</a></li>
-                        <li><a href="">Se connecter</a></li>
-                        <li><a href="">S’inscrire</a></li>
+                    <ul class="links-menu">
+                        <li><a href={{path('home')}}>Accueil</a></li>
+                        <li><a href={{path('galerie')}}>Galerie</a></li>
+                        <li class="nav-item"><a href="{{ path('contact') }}">Contact</a></li>
+
+                        {% if app.user %}
+                            <li>
+                                <a href="{{ path('ajouter') }}">Ajouter</a>
+                            </li>
+                            <li>
+                                <a href={{ path('app_logout') }}>Se déconnecter</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href={{ path('app_login') }}>Se connecter</a>
+                            </li>
+                            <li>
+                                <a href={{ path('inscription') }}>S’inscrire</a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin') }}">Admin</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             

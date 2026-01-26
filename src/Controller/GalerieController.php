@@ -13,7 +13,7 @@ final class GalerieController extends AbstractController
     public function index(ManekinekoRepository $manekinekoRepository): Response
     {
         $manekinekos = $manekinekoRepository->findBy([], ['id' => 'DESC']);
-
+        // dd($manekinekos);
         return $this->render('galerie/galerie.html.twig', [
             'manekinekos' => $manekinekos,
         ]);

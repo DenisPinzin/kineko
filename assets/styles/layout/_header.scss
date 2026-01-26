@@ -54,32 +54,37 @@ nav ul li a:hover {
 }
 
 .menu {
-  cursor: pointer;
-  display: none;
-}
-
-@media screen and (max-width: 1050px) {
-  .menu {
-    display: block;
-  }
-}
-
-
-@media screen and (max-width: 1050px) {
-  .menu-line {
-    display: flex;
-    margin: 10px;
-  }
-
-  nav ul {
+    cursor: pointer;
     display: none;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    padding: 15px 0;
-  }
+}
 
-  nav ul.nav-menu {
-    display: flex;
-  }
+
+@media screen and (max-width: 1050px) {
+    .menu-line {
+        display: flex;
+        margin: 10px;
+    }
+
+    .menu {
+        display: block;
+    }
+  
+    nav ul {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 15px 0;
+        z-index: 2;
+        background-color: v.$primary;
+    }
+  
+    nav .nav-menu {
+        display: flex;
+    }
+
+    nav ul li {
+        border-top: 1px solid v.$secondary;
+    }
 }

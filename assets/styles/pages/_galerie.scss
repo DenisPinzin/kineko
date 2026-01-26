@@ -1,0 +1,41 @@
+@use "../abstract/variable" as v;
+@use "../layout/header";
+@use "../layout/footer";
+@use "../components/card" as c;
+@use "../components/buttons";
+
+.bg-galerie {
+    background-image: url("../../img/bgcollection.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 3em 0;
+}
+
+.galerie-title {
+    text-align: center;
+}
+
+.cards-galerie{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2em;
+    place-items: center;
+}
+
+@media screen and (max-width: 1050px) {
+
+    .cards-galerie{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media screen and (max-width: 750px) {
+
+    .cards-galerie{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+}
