@@ -1,25 +1,36 @@
 @use "../abstract/variable" as v;
 
-// form {
-//   display: flex;
-//   flex-direction: column;
-//   gap: 2em;
-//   background-color: rgba(v.$quaternary, 0.7);
-//   border: 2px solid v.$primary;
-//   border-radius: 20px;
-//   padding: 4em;
-//   font-weight: bold;
-// }
+.contact-form form, .ajouter-form form, .modifier-form form{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background-color: rgba(v.$quaternary, 0.7);
+  border: 2px solid v.$primary;
+  border-radius: 20px;
+  padding: 2em;
+  font-weight: bold;
+}
 
-form div {
+#manekineko{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+#manekineko div {
     display: flex;
     flex-direction: column;
 }
 
-// form div input,  textarea {
-//     border: 2px solid v.$primary;
-//     height: 10px;
-// }
+.contact-form form div, .ajouter-form form div, .modifier-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+form div input,  textarea {
+    border: 2px solid v.$primary;
+    height: 20px;
+}
 
 textarea {
     min-height: 200px;

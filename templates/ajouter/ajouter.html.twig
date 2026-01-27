@@ -3,13 +3,17 @@
 {% block title %}Hello AjouterController!{% endblock %}
 
 {% block body %}
-<h1>Ajouter un Manekineko</h1>
+<section class="bg-ajouter">
+  <div class="container">
 
-{{ form_start(form) }}
-  {{ form_errors(form) }}
-  {{ form_widget(form) }}
-  <button type="submit">Enregistrer</button>
-{{ form_end(form) }}
-
-
+    <div class="ajouter-form">
+      {{ form_start(form) }}
+        <h1>Ajouter un Manekineko</h1>
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Enregistrer</button>
+      {{ form_end(form) }}
+    </div>
+  </div>
+</section>
 {% endblock %}

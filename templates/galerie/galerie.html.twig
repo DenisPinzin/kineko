@@ -37,7 +37,7 @@
                                     {% endif %} #}
 
                                     {% if m.user %}
-                                        <p><span>Ajouté par :</span> {{ m.user.userIdentifier }}</p>
+                                        <p><span>Ajouté par :</span> {{ m.user.pseudo }}</p>
                                     {% endif %}
 
                                     {% if app.user and (m.user == app.user or is_granted('ROLE_ADMIN')) %}

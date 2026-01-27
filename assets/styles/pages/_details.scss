@@ -1,0 +1,70 @@
+
+
+.bg-show {
+    background-image: url("../../img/Maneki-neko-3.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 3em 0;
+}
+    
+.container-show {
+    width: 1024px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.show-width {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 70%;
+    background-color: white;
+    border-radius: 20px;
+    padding: 2em;
+}
+
+.show-gap {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.show-width h1, .show-width h2 {
+    text-align: center;
+}
+
+.detail-img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.detail-img img {
+    width: 100%;
+
+}
+
+.container-show textarea {
+    width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    .container-show {
+        width: 500px;
+        display: flex;
+        justify-content: center;
+
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .container-show {
+        width: 350px;
+        display: flex;
+        justify-content: center;
+
+    }
+}

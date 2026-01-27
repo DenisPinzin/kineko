@@ -3,10 +3,15 @@
 {% block title %}Modifier la carte{% endblock %}
 
 {% block body %}
-  <h1>Modifier la carte</h1>
-
-  {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit">Enregistrer</button>
-  {{ form_end(form) }}
+  <section class="bg-modifier">
+    <div class="container">
+      <div class="modifier-form">
+        {{ form_start(form) }}
+            <h1>Modifier la carte</h1>
+          {{ form_widget(form) }}
+          <button type="submit">Enregistrer</button>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </section>
 {% endblock %}

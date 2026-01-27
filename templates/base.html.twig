@@ -17,9 +17,11 @@
     <body>
         <header>
             <nav>
-                <div class="logo">
-                    <img src="{{asset('img/logo.png')}}" alt="logo">
-                </div>
+                <a href={{path('home')}}>
+                    <div class="logo">
+                        <img src="{{asset('img/logo.png')}}" alt="logo">
+                    </div>
+                </a>
                 <div class="menu">
                     <div class="menu-line"></div>
                     <div class="menu-line"></div>
@@ -56,9 +58,11 @@
         {% block body %}{% endblock %}
         <footer>
             <div class="footer-links">
-                <div class="logo">
-                    <img src="{{asset('img/logo.png')}}" alt="logo">
-                </div>
+                <a href={{path('home')}}>
+                    <div class="logo">
+                        <img src="{{asset('img/logo.png')}}" alt="logo">
+                    </div>
+                </a>
                 <div class="socials">
                     <ul>
                         <li><a href=""><img src="{{asset('img/facebook-svgrepo-com.svg')}}" alt="logo"></a></li>

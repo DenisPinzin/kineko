@@ -84,8 +84,6 @@ final class ManekinekoController extends AbstractController
             $em->persist($commentaire);
             $em->flush();
 
-            $this->addFlash('success', 'Commentaire ajouté ✅');
-
             return $this->redirectToRoute('manekineko_show', ['id' => $manekineko->getId()]);
         }
 

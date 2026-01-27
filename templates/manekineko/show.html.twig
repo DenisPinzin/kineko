@@ -3,54 +3,59 @@
 {% block title %}Détails{% endblock %}
 
 {% block body %}
-  <h1>{{ manekineko.nom }}</h1>
+  <section class="bg-show">
+    <div class="container-show">
+      <div class="show-width">
+        <div class="detail-img">
+          <img src="{{ vich_uploader_asset(manekineko, 'imageFile') }}" alt="image" style="max-width: 400px;">
+        </div>
+        <div class="show-gap">
+          <h1>{{ manekineko.nom }}</h1>
+          <p><strong>Fabricant :  </strong> {{ manekineko.fabriquant.nom ?? '' }}</p>
+          <p><strong>Créée par :  </strong> {{ manekineko.user.pseudo ?? '' }}</p>
+        </div>
+        <div>
+          <h2>Description</h2>
+          <p>{{ manekineko.description }}</p>
+        </div>
+        <div class="show-gap">
+          <h2>Commentaires</h2>
+          {% if manekineko.commentaires is empty %}
+            <p>Aucun commentaire pour le moment.</p>
+          {% else %}
+            {% for c in manekineko.commentaires %}
+              <div class="comment">
+                <p><strong>{{ c.user.pseudo }}</strong></p>
+                <p>{{ c.comment }}</p>
 
-  <img src="{{ vich_uploader_asset(manekineko, 'imageFile') }}" alt="image" style="max-width: 400px;">
+                {% if app.user and (app.user == c.user or app.user == manekineko.user) %}
+                  <form method="POST"
+                        action="{{ path('commentaire_delete', { id: c.id }) }}"
+                        onsubmit="return confirm('Supprimer ce commentaire ?');"
+                        style="display:inline;">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete_comment' ~ c.id) }}">
+                    <button type="submit">Supprimer</button>
+                  </form>
+                {% endif %}
+              </div>
+            {% endfor %}
 
-  <p><strong>Fabricant :</strong> {{ manekineko.fabriquant.nom ?? '' }}</p>
-  <p><strong>Créée par :</strong> {{ manekineko.user.userIdentifier ?? '' }}</p>
+          {% endif %}
+        </div>
+        <hr>
 
-  <h2>Description</h2>
-  <p>{{ manekineko.description }}</p>
-
-  <a href="{{ path('galerie') }}"> Retour à la collection</a>
-
-  <hr>
-
-  <h2>Commentaires</h2>
-
-  {% if manekineko.commentaires is empty %}
-    <p>Aucun commentaire pour le moment.</p>
-  {% else %}
-{% for c in manekineko.commentaires %}
-  <div class="comment">
-    <p><strong>{{ c.user.userIdentifier }}</strong></p>
-    <p>{{ c.comment }}</p>
-
-    {% if app.user and (app.user == c.user or app.user == manekineko.user) %}
-      <form method="POST"
-            action="{{ path('commentaire_delete', { id: c.id }) }}"
-            onsubmit="return confirm('Supprimer ce commentaire ?');"
-            style="display:inline;">
-        <input type="hidden" name="_token" value="{{ csrf_token('delete_comment' ~ c.id) }}">
-        <button type="submit">Supprimer</button>
-      </form>
-    {% endif %}
-  </div>
-{% endfor %}
-
-  {% endif %}
-
-  <hr>
-
-  {% if app.user %}
-    <h3>Laisser un commentaire</h3>
-    {{ form_start(commentForm) }}
-      {{ form_widget(commentForm) }}
-      <button type="submit">Envoyer</button>
-    {{ form_end(commentForm) }}
-  {% else %}
-    <p>Connecte-toi pour laisser un commentaire.</p>
-    <a href="{{ path('app_login') }}">Se connecter</a>
-  {% endif %}
+        {% if app.user %}
+          <h3>Laisser un commentaire</h3>
+          {{ form_start(commentForm) }}
+            {{ form_widget(commentForm) }}
+            <button type="submit">Envoyer</button>
+          {{ form_end(commentForm) }}
+        {% else %}
+          <p>Connecte-toi pour laisser un commentaire.</p>
+          <a href="{{ path('app_login') }}">Se connecter</a>
+        {% endif %}
+        <a href="{{ path('galerie') }}"> Retour à la collection</a>
+        </div>
+      </div>
+  </section>
 {% endblock %}
